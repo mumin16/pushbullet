@@ -1,0 +1,48 @@
+Buy=Cross(C,MA(C,15));
+Sell=Cross(MA(C,15),c);
+
+
+
+
+
+
+TokenKey="xxxxxxxxxxxxxxxxxxx";
+
+NoteTitleforBuy="Buy: "+Name();
+NoteTitleforSell="Sell: "+Name();
+NoteBody="Date/Time: "+DateTimeToStr(LastValue(DateTime()))+" Last Price:"+LastValue(C);
+
+
+
+
+if(LastValue(Buy)==1 AND LastValue(Sell)==0)
+{
+SendNote(TokenKey, NoteTitleforBuy, NoteBody);
+
+
+AB = CreateObject("Broker.Application");
+AW = AB.ActiveWindow;
+AW.ExportImage( "screen.jpg", 320, 240 );
+SendScreenCapture(TokenKey, NoteTitleforBuy, NoteBody);
+
+
+}
+
+if(LastValue(Buy)==0 AND LastValue(Sell)==1)
+{
+SendNote(TokenKey, NoteTitleforSell, NoteBody);
+
+
+AB = CreateObject("Broker.Application");
+AW = AB.ActiveWindow;
+AW.ExportImage( "screen.jpg", 320, 240 );
+SendScreenCapture(TokenKey, NoteTitleforBuy, NoteBody);
+
+}
+
+
+
+
+
+
+
